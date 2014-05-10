@@ -7,6 +7,9 @@ d <- read.table(file=pipe("grep '^[12]/2/2007' household_power_consumption.txt")
 d$DateTime <- paste(d$Date,d$Time)
 d$DateTime <- strptime(d$DateTime, "%d/%m/%Y %H:%M:%S")
 
+# Open PNG device
+png("plot3.png")
+
 # Make a histogram of Sub_metering_1 vs date/time
 # Specify type of the plot (line)
 # Specify titles of x and y axes
@@ -18,8 +21,6 @@ with(d,lines(DateTime,Sub_metering_2,col="red"))
 with(d,lines(DateTime,Sub_metering_3,col="blue"))
 legend("topright",lty=1,col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 
-# Save the histogram to a PNG file
 # Close PNG device
-dev.copy(png,"plot3.png")
 dev.off()
 

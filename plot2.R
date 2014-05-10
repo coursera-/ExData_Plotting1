@@ -7,13 +7,14 @@ d <- read.table(file=pipe("grep '^[12]/2/2007' household_power_consumption.txt")
 d$DateTime <- paste(d$Date,d$Time)
 d$DateTime <- strptime(d$DateTime, "%d/%m/%Y %H:%M:%S")
 
+# Open PNG device
+png("plot2.png")
+
 # Make a histogram of global active power vs date/time
 # Specify type of the plot (line)
 # Specify titles of x and y axes
 with(d,plot(DateTime,Global_active_power,type="l",xlab="",ylab="Global Active Power (kilowatts)"))
 
-# Save the histogram to a PNG file
 # Close PNG device
-dev.copy(png,"plot2.png")
 dev.off()
 
